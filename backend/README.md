@@ -19,16 +19,18 @@ We will add the Lambda code incrementally after the AWS flow is clear.
 
 ## Local Smoke Tests
 
-The current handlers do not call AWS yet. They only parse sample Lambda events.
+The current Python handlers do not call AWS yet. They only parse sample Lambda events.
 
 Run `index-photos` locally:
 
 ```sh
-node -e "const event = require('./index-photos/events/s3-put.json'); require('./index-photos').handler(event).then(console.log)"
+cd backend/index-photos
+python -c "import json; from handler import lambda_handler; event = json.load(open('events/s3-put.json')); print(json.dumps(lambda_handler(event, None), indent=2))"
 ```
 
 Run `search-photos` locally:
 
 ```sh
-node -e "const event = require('./search-photos/events/api-gateway-search.json'); require('./search-photos').handler(event).then(console.log)"
+cd backend/search-photos
+python -c "import json; from handler import lambda_handler; event = json.load(open('events/api-gateway-search.json')); print(json.dumps(lambda_handler(event, None), indent=2))"
 ```

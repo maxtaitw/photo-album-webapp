@@ -61,10 +61,10 @@ Use `events/s3-put.json` to understand the S3 event shape before deploying to AW
 
 ## Local Helper Tests
 
-The helper logic in `photoDocument.js` is dependency-free and does not call AWS.
+The helper logic in `photo_document.py` is dependency-free and does not call AWS.
 
 Run:
 
 ```sh
-node backend/index-photos/photoDocument.test.js
+python backend/index-photos/test_photo_document.py
 ```
