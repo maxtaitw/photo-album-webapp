@@ -49,3 +49,7 @@ Call the API with a known label and confirm:
 - Lex extracts the expected keyword or keywords.
 - OpenSearch returns matching indexed photos.
 - The API response can be consumed by the frontend.
+
+## Local Sample Event
+
+Use `events/api-gateway-search.json` to understand the API Gateway event shape before deploying to AWS.

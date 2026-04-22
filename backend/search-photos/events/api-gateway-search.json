@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "path": "/search",
+  "queryStringParameters": {
+    "q": "show me photos with trees and birds"
+  }
+}

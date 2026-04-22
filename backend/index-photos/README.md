@@ -54,3 +54,7 @@ Upload one image to the photo bucket and confirm:
 - Rekognition labels are visible in CloudWatch logs.
 - Custom labels are read when the upload includes `x-amz-meta-customLabels`.
 - A document is created in the `photos` index.
+
+## Local Sample Event
+
+Use `events/s3-put.json` to understand the S3 event shape before deploying to AWS.

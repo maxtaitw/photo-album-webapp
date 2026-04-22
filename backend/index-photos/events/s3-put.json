@@ -1,0 +1,16 @@
+{
+  "Records": [
+    {
+      "eventTime": "2026-04-22T12:40:02.000Z",
+      "eventName": "ObjectCreated:Put",
+      "s3": {
+        "bucket": {
+          "name": "photo-album-storage-bucket"
+        },
+        "object": {
+          "key": "sample-photo.jpg"
+        }
+      }
+    }
+  ]
+}
