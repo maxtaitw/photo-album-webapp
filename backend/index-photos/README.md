@@ -58,3 +58,13 @@ Upload one image to the photo bucket and confirm:
 ## Local Sample Event
 
 Use `events/s3-put.json` to understand the S3 event shape before deploying to AWS.
+
+## Local Helper Tests
+
+The helper logic in `photoDocument.js` is dependency-free and does not call AWS.
+
+Run:
+
+```sh
+node backend/index-photos/photoDocument.test.js
+```
