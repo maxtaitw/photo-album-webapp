@@ -42,12 +42,19 @@ Custom labels must be searchable the same way Rekognition labels are searchable.
 We will build this project in small steps:
 
 1. Set up the repository and baseline documentation.
-2. Create the backend Lambda structure.
-3. Implement photo indexing locally as much as possible before AWS deployment.
-4. Add search behavior.
-5. Build the API layer.
-6. Build the frontend.
-7. Add deployment resources.
-8. Add the basic CloudFormation template.
+2. Create the project folder structure.
+3. Create the backend Lambda structure.
+4. Implement photo indexing locally as much as possible before AWS deployment.
+5. Add search behavior.
+6. Build the API layer.
+7. Build the frontend.
+8. Add deployment resources.
+9. Add the basic CloudFormation template.
 
 Each step should be small enough to review before moving on.
+
+## Repository Structure
+
+- `backend/`: Lambda functions and backend configuration.
+- `frontend/`: Static web application files.
+- `infrastructure/`: CloudFormation, deployment notes, and AWS setup notes.
