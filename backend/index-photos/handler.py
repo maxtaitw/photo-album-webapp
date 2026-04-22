@@ -1,6 +1,8 @@
 import json
 from urllib.parse import unquote_plus
 
+from photo_document import build_photo_document
+
 
 def lambda_handler(event, context):
     records = event.get("Records", [])
@@ -12,11 +14,12 @@ def lambda_handler(event, context):
         object_key = s3_info.get("object", {}).get("key")
 
         photos.append(
-            {
-                "bucket": bucket,
-                "objectKey": unquote_plus(object_key) if object_key else None,
-                "eventTime": record.get("eventTime"),
-            }
+            build_photo_document(
+                bucket=bucket,
+                object_key=unquote_plus(object_key) if object_key else None,
+                created_timestamp=record.get("eventTime"),
+                labels=[],
+            )
         )
 
     return {

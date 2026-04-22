@@ -68,3 +68,9 @@ Run:
 ```sh
 python backend/index-photos/test_photo_document.py
 ```
+
+Run the handler test:
+
+```sh
+python backend/index-photos/test_handler.py
+```
