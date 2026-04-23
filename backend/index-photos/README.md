@@ -63,12 +63,22 @@ The sample event includes local-only `metadata.customLabels` and `rekognitionLab
 
 ## Local Helper Tests
 
+The current local flow is:
+
+- `handler -> rekognition_client -> simulated Rekognition labels`
+- `handler -> s3_metadata_client -> simulated S3 metadata`
+- `handler -> index_client -> simulated index write`
+- `handler -> photo_document -> final indexed document shape`
+
 The helper logic in `photo_document.py` is dependency-free and does not call AWS.
 
 Run:
 
 ```sh
 python backend/index-photos/test_photo_document.py
+python backend/index-photos/test_rekognition_client.py
+python backend/index-photos/test_s3_metadata_client.py
+python backend/index-photos/test_index_client.py
 ```
 
 Run the handler test:
