@@ -53,3 +53,14 @@ Call the API with a known label and confirm:
 ## Local Sample Event
 
 Use `events/api-gateway-search.json` to understand the API Gateway event shape before deploying to AWS.
+
+## Local Tests
+
+The current handler uses local keyword extraction only. Real Lex integration will come later.
+
+Run:
+
+```sh
+python backend/search-photos/test_query_parser.py
+python backend/search-photos/test_handler.py
+```

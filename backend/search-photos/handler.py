@@ -1,5 +1,7 @@
 import json
 
+from query_parser import extract_keywords
+
 
 def lambda_handler(event, context):
     query_string_parameters = event.get("queryStringParameters") or {}
@@ -13,6 +15,7 @@ def lambda_handler(event, context):
         "body": json.dumps(
             {
                 "query": query,
+                "keywords": extract_keywords(query),
                 "results": [],
             }
         ),
