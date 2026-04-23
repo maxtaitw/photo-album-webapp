@@ -1,7 +1,7 @@
 import json
 from urllib.parse import unquote_plus
 
-from photo_document import build_photo_document
+from photo_document import build_photo_document, merge_labels
 
 
 def lambda_handler(event, context):
@@ -11,14 +11,16 @@ def lambda_handler(event, context):
     for record in records:
         s3_info = record.get("s3", {})
         bucket = s3_info.get("bucket", {}).get("name")
-        object_key = s3_info.get("object", {}).get("key")
+        s3_object = s3_info.get("object", {})
+        object_key = s3_object.get("key")
+        custom_labels = s3_object.get("metadata", {}).get("customLabels")
 
         photos.append(
             build_photo_document(
                 bucket=bucket,
                 object_key=unquote_plus(object_key) if object_key else None,
                 created_timestamp=record.get("eventTime"),
-                labels=[],
+                labels=merge_labels([], custom_labels),
             )
         )
 

@@ -8,7 +8,10 @@
           "name": "photo-album-storage-bucket"
         },
         "object": {
-          "key": "sample-photo.jpg"
+          "key": "sample-photo.jpg",
+          "metadata": {
+            "customLabels": "Sam, Sally"
+          }
         }
       }
     }

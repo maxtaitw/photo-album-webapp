@@ -23,7 +23,7 @@ class IndexPhotosHandlerTest(unittest.TestCase):
                         "objectKey": "sample-photo.jpg",
                         "bucket": "photo-album-storage-bucket",
                         "createdTimestamp": "2026-04-22T12:40:02.000Z",
-                        "labels": [],
+                        "labels": ["sam", "sally"],
                     }
                 ],
             },
