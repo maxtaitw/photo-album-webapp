@@ -11,7 +11,18 @@
           "key": "sample-photo.jpg",
           "metadata": {
             "customLabels": "Sam, Sally"
-          }
+          },
+          "rekognitionLabels": [
+            {
+              "Name": "Dog"
+            },
+            {
+              "Name": "Park"
+            },
+            {
+              "Name": "Sam"
+            }
+          ]
         }
       }
     }

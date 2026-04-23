@@ -59,7 +59,7 @@ Upload one image to the photo bucket and confirm:
 
 Use `events/s3-put.json` to understand the S3 event shape before deploying to AWS.
 
-The sample event includes a local-only `metadata.customLabels` field so the handler can exercise custom label parsing before it calls AWS. Real S3 upload metadata is not included directly in the S3 event; the deployed Lambda will read `x-amz-meta-customLabels` later with S3 `HeadObject`.
+The sample event includes local-only `metadata.customLabels` and `rekognitionLabels` fields so the handler can exercise label merging before it calls AWS. Real S3 upload metadata is not included directly in the S3 event; the deployed Lambda will read `x-amz-meta-customLabels` later with S3 `HeadObject`. Real Rekognition labels will come from `rekognition.detect_labels`.
 
 ## Local Helper Tests
 
