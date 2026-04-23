@@ -56,12 +56,13 @@ Use `events/api-gateway-search.json` to understand the API Gateway event shape b
 
 ## Local Tests
 
-The current flow is `handler -> lex_client -> local parser`. Real Lex integration will replace the local parser later.
+The current flow is `handler -> lex_client -> local parser` and `handler -> search_client -> local photo dataset`. Real Lex integration and OpenSearch queries will replace the local pieces later.
 
 Run:
 
 ```sh
 python backend/search-photos/test_query_parser.py
 python backend/search-photos/test_lex_client.py
+python backend/search-photos/test_search_client.py
 python backend/search-photos/test_handler.py
 ```
