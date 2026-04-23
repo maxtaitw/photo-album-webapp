@@ -56,11 +56,12 @@ Use `events/api-gateway-search.json` to understand the API Gateway event shape b
 
 ## Local Tests
 
-The current handler uses local keyword extraction only. Real Lex integration will come later.
+The current flow is `handler -> lex_client -> local parser`. Real Lex integration will replace the local parser later.
 
 Run:
 
 ```sh
 python backend/search-photos/test_query_parser.py
+python backend/search-photos/test_lex_client.py
 python backend/search-photos/test_handler.py
 ```

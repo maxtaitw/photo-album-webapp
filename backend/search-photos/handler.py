@@ -1,6 +1,6 @@
 import json
 
-from query_parser import extract_keywords
+from lex_client import interpret_query
 
 
 def lambda_handler(event, context):
@@ -15,7 +15,7 @@ def lambda_handler(event, context):
         "body": json.dumps(
             {
                 "query": query,
-                "keywords": extract_keywords(query),
+                "keywords": interpret_query(query),
                 "results": [],
             }
         ),
