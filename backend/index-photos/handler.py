@@ -16,14 +16,15 @@ def lambda_handler(event, context):
         bucket = s3_info.get("bucket", {}).get("name")
         s3_object = s3_info.get("object", {})
         object_key = s3_object.get("key")
-        custom_labels = get_custom_labels(record)
-        rekognition_labels = detect_labels(record)
+        decoded_object_key = unquote_plus(object_key) if object_key else None
+        custom_labels = get_custom_labels(bucket, decoded_object_key)
+        rekognition_labels = detect_labels(bucket, decoded_object_key)
 
         photos.append(
             index_photo(
                 build_photo_document(
                     bucket=bucket,
-                    object_key=unquote_plus(object_key) if object_key else None,
+                    object_key=decoded_object_key,
                     created_timestamp=record.get("eventTime"),
                     labels=merge_labels(rekognition_labels, custom_labels),
                 )

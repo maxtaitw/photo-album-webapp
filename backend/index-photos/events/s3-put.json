@@ -8,21 +8,7 @@
           "name": "photo-album-storage-bucket"
         },
         "object": {
-          "key": "sample-photo.jpg",
-          "metadata": {
-            "customLabels": "Sam, Sally"
-          },
-          "rekognitionLabels": [
-            {
-              "Name": "Dog"
-            },
-            {
-              "Name": "Park"
-            },
-            {
-              "Name": "Sam"
-            }
-          ]
+          "key": "sample-photo.jpg"
         }
       }
     }

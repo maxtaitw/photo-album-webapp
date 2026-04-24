@@ -59,14 +59,14 @@ Upload one image to the photo bucket and confirm:
 
 Use `events/s3-put.json` to understand the S3 event shape before deploying to AWS.
 
-The sample event includes local-only `metadata.customLabels` and `rekognitionLabels` fields so the handler can exercise label merging before it calls AWS. Real S3 upload metadata is not included directly in the S3 event; the deployed Lambda will read `x-amz-meta-customLabels` later with S3 `HeadObject`. Real Rekognition labels will come from `rekognition.detect_labels`.
+The sample event is now closer to the real S3 event shape. Custom labels come from S3 `head_object`, and Rekognition labels come from `rekognition.detect_labels`. The OpenSearch write is still simulated through `index_client`.
 
 ## Local Helper Tests
 
 The current local flow is:
 
-- `handler -> rekognition_client -> simulated Rekognition labels`
-- `handler -> s3_metadata_client -> simulated S3 metadata`
+- `handler -> rekognition_client -> real AWS Rekognition read`
+- `handler -> s3_metadata_client -> real AWS S3 metadata read`
 - `handler -> index_client -> simulated index write`
 - `handler -> photo_document -> final indexed document shape`
 

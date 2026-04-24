@@ -1,17 +1,26 @@
-import json
 import unittest
-from pathlib import Path
+from unittest.mock import Mock, patch
 
 from s3_metadata_client import get_custom_labels
 
 
 class S3MetadataClientTest(unittest.TestCase):
-    def test_get_custom_labels_reads_simulated_metadata_from_event(self):
-        event_path = Path(__file__).parent / "events" / "s3-put.json"
-        event = json.loads(event_path.read_text())
-        record = event["Records"][0]
+    @patch("s3_metadata_client._boto3_client")
+    def test_get_custom_labels_reads_s3_metadata(self, mock_boto3_client):
+        client = Mock()
+        client.head_object.return_value = {"Metadata": {"customlabels": "Sam, Sally"}}
+        mock_boto3_client.return_value = client
 
-        self.assertEqual(get_custom_labels(record), "Sam, Sally")
+        custom_labels = get_custom_labels(
+            "photo-album-storage-bucket", "sample-photo.jpg"
+        )
+
+        mock_boto3_client.assert_called_once_with("s3")
+        client.head_object.assert_called_once_with(
+            Bucket="photo-album-storage-bucket",
+            Key="sample-photo.jpg",
+        )
+        self.assertEqual(custom_labels, "Sam, Sally")
 
 
 if __name__ == "__main__":
