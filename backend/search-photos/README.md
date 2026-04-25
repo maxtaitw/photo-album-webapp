@@ -56,13 +56,15 @@ Use `events/api-gateway-search.json` to understand the API Gateway event shape b
 
 ## Local Tests
 
-The current flow is `handler -> lex_client -> real AWS Lex read` and `handler -> search_client -> local photo dataset`. OpenSearch queries will replace the local search client later.
+The current flow is `handler -> lex_client -> real AWS Lex read` and `handler -> search_client -> OpenSearch query seam`.
 
 Expected environment variables for deployment:
 
 - `LEX_BOT_ID`
 - `LEX_BOT_ALIAS_ID`
 - `LEX_LOCALE_ID`
+- `OPENSEARCH_ENDPOINT`
+- `OPENSEARCH_INDEX` (optional, defaults to `photos`)
 
 Run:
 
