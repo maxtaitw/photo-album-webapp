@@ -59,7 +59,7 @@ Upload one image to the photo bucket and confirm:
 
 Use `events/s3-put.json` to understand the S3 event shape before deploying to AWS.
 
-The sample event is now closer to the real S3 event shape. Custom labels come from S3 `head_object`, and Rekognition labels come from `rekognition.detect_labels`. The OpenSearch write is still simulated through `index_client`.
+The sample event is now closer to the real S3 event shape. Custom labels come from S3 `head_object`, Rekognition labels come from `rekognition.detect_labels`, and indexing uses an OpenSearch HTTP write seam through `index_client`.
 
 ## Local Helper Tests
 
@@ -67,8 +67,13 @@ The current local flow is:
 
 - `handler -> rekognition_client -> real AWS Rekognition read`
 - `handler -> s3_metadata_client -> real AWS S3 metadata read`
-- `handler -> index_client -> simulated index write`
+- `handler -> index_client -> OpenSearch write seam`
 - `handler -> photo_document -> final indexed document shape`
+
+Expected environment variables for deployment:
+
+- `OPENSEARCH_ENDPOINT`
+- `OPENSEARCH_INDEX` (optional, defaults to `photos`)
 
 The helper logic in `photo_document.py` is dependency-free and does not call AWS.
 
