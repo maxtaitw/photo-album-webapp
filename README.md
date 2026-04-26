@@ -37,24 +37,24 @@ x-amz-meta-customLabels: label one, label two
 
 Custom labels must be searchable the same way Rekognition labels are searchable.
 
-## Learning Plan
+## Plan
 
-We will build this project in small steps:
-
-1. Set up the repository and baseline documentation.
-2. Create the project folder structure.
-3. Create the backend Lambda structure.
-4. Implement photo indexing locally as much as possible before AWS deployment.
-5. Add search behavior.
-6. Build the API layer.
-7. Build the frontend.
-8. Add deployment resources.
-9. Add the basic CloudFormation template.
-
-Each step should be small enough to review before moving on.
+- [x] Set up the repository and baseline documentation.
+- [x] Create the project folder structure.
+- [x] Create the backend Lambda structure.
+- [x] Implement photo indexing locally as much as possible before AWS deployment.
+- [x] Add search behavior.
+- [x] Build the API layer.
+- [ ] Build the frontend.
+- [ ] Add deployment resources.
+- [ ] Add the basic CloudFormation template.
 
 ## Repository Structure
 
 - `backend/`: Lambda functions and backend configuration.
 - `frontend/`: Static web application files.
 - `infrastructure/`: CloudFormation, deployment notes, and AWS setup notes.
+
+## Team Handoff
+
+For the current deployed backend state and teammate instructions, see `infrastructure/team-handoff.md`.

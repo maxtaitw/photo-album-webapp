@@ -24,13 +24,18 @@ The current Python handlers do not call AWS yet. They only parse sample Lambda e
 Run `index-photos` locally:
 
 ```sh
-cd backend/index-photos
-python -c "import json; from handler import lambda_handler; event = json.load(open('events/s3-put.json')); print(json.dumps(lambda_handler(event, None), indent=2))"
+python -c "import json, sys; from pathlib import Path; sys.path.insert(0, 'backend/index-photos'); from handler import lambda_handler; event = json.loads(Path('backend/index-photos/events/s3-put.json').read_text()); print(json.dumps(lambda_handler(event, None), indent=2))"
 ```
 
 Run `search-photos` locally:
 
 ```sh
-cd backend/search-photos
-python -c "import json; from handler import lambda_handler; event = json.load(open('events/api-gateway-search.json')); print(json.dumps(lambda_handler(event, None), indent=2))"
+python -c "import json, sys; from pathlib import Path; sys.path.insert(0, 'backend/search-photos'); from handler import lambda_handler; event = json.loads(Path('backend/search-photos/events/api-gateway-search.json').read_text()); print(json.dumps(lambda_handler(event, None), indent=2))"
+```
+
+Run `index-photos` tests from the repository root:
+
+```sh
+python backend/index-photos/test_photo_document.py
+python backend/index-photos/test_handler.py
 ```
