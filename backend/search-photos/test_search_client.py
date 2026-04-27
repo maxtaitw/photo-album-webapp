@@ -38,6 +38,7 @@ class SearchClientTest(unittest.TestCase):
             search_photos(["dog"]),
             [
                 {
+                    "url": "https://photo-album-storage-bucket.s3.us-east-1.amazonaws.com/sample-photo.jpg",
                     "objectKey": "sample-photo.jpg",
                     "bucket": "photo-album-storage-bucket",
                     "createdTimestamp": "2026-04-22T12:40:02.000Z",
@@ -86,6 +87,7 @@ class SearchClientTest(unittest.TestCase):
             search_photos(["trees", "birds"]),
             [
                 {
+                    "url": "https://photo-album-storage-bucket.s3.us-east-1.amazonaws.com/forest-birds.jpg",
                     "objectKey": "forest-birds.jpg",
                     "bucket": "photo-album-storage-bucket",
                     "createdTimestamp": "2026-04-23T09:15:00.000Z",

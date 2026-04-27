@@ -19,6 +19,7 @@ class SearchPhotosHandlerTest(unittest.TestCase):
             {
                 "objectKey": "forest-birds.jpg",
                 "bucket": "photo-album-storage-bucket",
+                "url": "https://photo-album-storage-bucket.s3.us-east-1.amazonaws.com/forest-birds.jpg",
                 "createdTimestamp": "2026-04-23T09:15:00.000Z",
                 "labels": ["trees", "birds", "forest"],
             }
@@ -30,7 +31,15 @@ class SearchPhotosHandlerTest(unittest.TestCase):
         mock_interpret_query.assert_called_once_with("show me photos with trees and birds")
         mock_search_photos.assert_called_once_with(["trees", "birds"])
         self.assertEqual(response["statusCode"], 200)
-        self.assertEqual(response["headers"], {"Content-Type": "application/json"})
+        self.assertEqual(
+            response["headers"],
+            {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "Content-Type,x-api-key",
+                "Access-Control-Allow-Methods": "GET,OPTIONS",
+            },
+        )
         self.assertEqual(
             body,
             {
@@ -40,6 +49,7 @@ class SearchPhotosHandlerTest(unittest.TestCase):
                     {
                         "objectKey": "forest-birds.jpg",
                         "bucket": "photo-album-storage-bucket",
+                        "url": "https://photo-album-storage-bucket.s3.us-east-1.amazonaws.com/forest-birds.jpg",
                         "createdTimestamp": "2026-04-23T09:15:00.000Z",
                         "labels": ["trees", "birds", "forest"],
                     }

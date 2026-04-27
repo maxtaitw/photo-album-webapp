@@ -1,12 +1,35 @@
 # Frontend
 
-This folder will contain the static photo album web application.
+Static photo album web application for Assignment 3.
 
-Planned features:
+## Local configuration
 
-- Search photos with natural language text.
-- Display matching photo results.
-- Upload new photos.
-- Attach optional custom labels during upload.
+Copy the example config and add the shared API key:
 
-The frontend will eventually be hosted from an S3 static website bucket.
+```bash
+cp frontend/config.example.js frontend/config.js
+```
+
+Edit `frontend/config.js`:
+
+```js
+window.PHOTO_ALBUM_CONFIG = {
+  apiBaseUrl: "https://or7z11lo1g.execute-api.us-east-1.amazonaws.com/prod",
+  apiKey: "your shared API key",
+  region: "us-east-1",
+  photoBaseUrl: ""
+};
+```
+
+`frontend/config.js` is ignored by git because it contains the API key.
+
+## Files to deploy
+
+Upload these files to the frontend S3 static website bucket:
+
+- `index.html`
+- `styles.css`
+- `app.js`
+- `config.js`
+
+The API key is visible to browser users after deployment. That is expected for this assignment API-key setup, but it should still not be committed to the repository.

@@ -45,9 +45,9 @@ Custom labels must be searchable the same way Rekognition labels are searchable.
 - [x] Implement photo indexing locally as much as possible before AWS deployment.
 - [x] Add search behavior.
 - [x] Build the API layer.
-- [ ] Build the frontend.
-- [ ] Add deployment resources.
-- [ ] Add the basic CloudFormation template.
+- [x] Build the frontend.
+- [x] Add deployment resources.
+- [x] Add the basic CloudFormation template.
 
 ## Repository Structure
 

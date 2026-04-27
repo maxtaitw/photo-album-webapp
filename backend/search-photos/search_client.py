@@ -1,5 +1,6 @@
 import json
 import os
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 
@@ -66,9 +67,18 @@ def _post_json(url, payload):
 
 def _map_hit_to_photo(hit):
     source = hit.get("_source", {})
+    bucket = source.get("bucket")
+    object_key = source.get("objectKey")
+    region = os.environ.get("PHOTO_BUCKET_REGION") or os.environ.get("AWS_REGION", "us-east-1")
+    url = source.get("url")
+    if not url and bucket and object_key:
+        encoded_key = quote(object_key, safe="/")
+        url = f"https://{bucket}.s3.{region}.amazonaws.com/{encoded_key}"
+
     return {
-        "objectKey": source.get("objectKey"),
-        "bucket": source.get("bucket"),
+        "url": url,
+        "objectKey": object_key,
+        "bucket": bucket,
         "createdTimestamp": source.get("createdTimestamp"),
         "labels": source.get("labels", []),
     }

@@ -1,0 +1,16 @@
+version: 0.2
+
+env:
+  variables:
+    INDEX_FUNCTION_NAME: index-photos
+    SEARCH_FUNCTION_NAME: search-photos
+
+phases:
+  build:
+    commands:
+      - zip -j /tmp/index-photos.zip backend/index-photos/*.py
+      - zip -j /tmp/search-photos.zip backend/search-photos/*.py
+  post_build:
+    commands:
+      - aws lambda update-function-code --function-name "$INDEX_FUNCTION_NAME" --zip-file fileb:///tmp/index-photos.zip
+      - aws lambda update-function-code --function-name "$SEARCH_FUNCTION_NAME" --zip-file fileb:///tmp/search-photos.zip

@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: us-east-1
+    PHOTO_BASE_URL: ""
+
+phases:
+  build:
+    commands:
+      - test -n "$FRONTEND_BUCKET"
+      - test -n "$API_BASE_URL"
+      - test -n "$PHOTO_ALBUM_API_KEY"
+      - |
+        cat > frontend/config.js <<EOF
+        window.PHOTO_ALBUM_CONFIG = {
+          apiBaseUrl: "$API_BASE_URL",
+          apiKey: "$PHOTO_ALBUM_API_KEY",
+          region: "$AWS_REGION",
+          photoBaseUrl: "$PHOTO_BASE_URL"
+        };
+        EOF
+  post_build:
+    commands:
+      - aws s3 sync frontend/ "s3://$FRONTEND_BUCKET/" --delete --exclude "README.md" --exclude "config.example.js"

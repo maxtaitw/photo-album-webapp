@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Photo Album Search</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Photo album workspace">
+        <header class="topbar">
+          <div>
+            <h1>Photo Album</h1>
+            <p id="connectionStatus" class="status-text">Checking configuration</p>
+          </div>
+          <button id="refreshButton" class="icon-button" type="button" title="Repeat search" aria-label="Repeat search">
+            &#8635;
+          </button>
+        </header>
+
+        <section class="panel search-panel" aria-label="Search photos">
+          <form id="searchForm" class="search-form">
+            <label class="field-label" for="searchInput">Search</label>
+            <div class="search-row">
+              <input id="searchInput" type="search" name="q" autocomplete="off" placeholder="show me trees and birds">
+              <button type="submit">Search</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel upload-panel" aria-label="Upload photo">
+          <form id="uploadForm" class="upload-form">
+            <div class="upload-grid">
+              <label class="file-drop" for="photoInput">
+                <span id="fileName">Choose image</span>
+                <input id="photoInput" type="file" name="photo" accept="image/png,image/jpeg" required>
+              </label>
+              <label class="field-stack" for="labelsInput">
+                <span class="field-label">Custom labels</span>
+                <input id="labelsInput" type="text" name="labels" placeholder="Sam, Sally">
+              </label>
+              <button type="submit">Upload</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="results-header" aria-live="polite">
+          <h2 id="resultsTitle">Results</h2>
+          <p id="resultCount">No search yet</p>
+        </section>
+
+        <section id="messageArea" class="message-area" hidden></section>
+        <section id="resultsGrid" class="results-grid" aria-label="Search results"></section>
+      </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

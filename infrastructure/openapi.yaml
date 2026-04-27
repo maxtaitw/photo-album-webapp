@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  title: Photo Album Search
+  version: "1.0.0"
+schemes:
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+paths:
+  /search:
+    get:
+      summary: Search photos.
+      operationId: searchPhotos
+      security:
+        - api_key: []
+      parameters:
+        - name: q
+          in: query
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Search results.
+          schema:
+            $ref: "#/definitions/SearchResponse"
+  /photos/{object}:
+    put:
+      summary: Upload a photo.
+      operationId: uploadPhoto
+      security:
+        - api_key: []
+      consumes:
+        - image/jpeg
+        - image/jpg
+        - image/png
+      parameters:
+        - name: object
+          in: path
+          required: true
+          type: string
+        - name: x-amz-meta-customLabels
+          in: header
+          required: false
+          type: string
+      responses:
+        "200":
+          description: S3 PUT response.
+          schema:
+            type: object
+definitions:
+  SearchResponse:
+    type: object
+    properties:
+      query:
+        type: string
+      keywords:
+        type: array
+        items:
+          type: string
+      results:
+        type: array
+        items:
+          $ref: "#/definitions/Photo"
+  Photo:
+    type: object
+    properties:
+      url:
+        type: string
+      objectKey:
+        type: string
+      bucket:
+        type: string
+      createdTimestamp:
+        type: string
+      labels:
+        type: array
+        items:
+          type: string
