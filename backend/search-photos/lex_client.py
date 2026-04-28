@@ -75,4 +75,4 @@ def interpret_query(text):
             if fallback_keywords:
                 return fallback_keywords
 
-    return []
+    return extract_keywords(text)

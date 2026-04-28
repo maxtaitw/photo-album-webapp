@@ -37,9 +37,9 @@ function showMessage(message, type = "info") {
   elements.messageArea.hidden = false;
 }
 
-function formatNetworkError(error, action) {
+function formatNetworkError(error, action, detail) {
   if (error instanceof TypeError && /load failed|failed to fetch/i.test(error.message)) {
-    return `${action} could not reach API Gateway. Check the API URL, API Gateway CORS/OPTIONS, and allowed headers for x-api-key and x-amz-meta-customLabels.`;
+    return `${action} could not reach API Gateway. Check the API URL and API Gateway CORS/OPTIONS. ${detail}`;
   }
 
   return error.message;
@@ -178,7 +178,10 @@ async function searchPhotos(query) {
 
     renderResults(normalizeResults(body));
   } catch (error) {
-    showMessage(formatNetworkError(error, "Search"), "error");
+    showMessage(
+      formatNetworkError(error, "Search", "For /search, allow GET,OPTIONS and headers Content-Type,x-api-key."),
+      "error"
+    );
   } finally {
     setBusy(false);
   }
@@ -232,7 +235,10 @@ async function uploadPhoto(file, labels) {
     elements.fileName.textContent = "Choose image";
     showMessage("Upload finished. Search by an automatic label or custom label after indexing completes.", "info");
   } catch (error) {
-    showMessage(formatNetworkError(error, "Upload"), "error");
+    showMessage(
+      formatNetworkError(error, "Upload", "For /photos/{object}, allow PUT,OPTIONS and headers Content-Type,x-api-key,x-amz-meta-customLabels."),
+      "error"
+    );
   } finally {
     setBusy(false);
   }

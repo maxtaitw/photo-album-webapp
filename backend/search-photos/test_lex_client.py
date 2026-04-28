@@ -97,6 +97,26 @@ class LexClientTest(unittest.TestCase):
 
         self.assertEqual(interpret_query("show me photos with trees and birds"), ["trees", "birds"])
 
+    @patch.dict(
+        os.environ,
+        {
+            "LEX_BOT_ID": "bot-id",
+            "LEX_BOT_ALIAS_ID": "alias-id",
+            "LEX_LOCALE_ID": "en_US",
+        },
+        clear=True,
+    )
+    @patch("lex_client._boto3_client")
+    def test_interpret_query_falls_back_to_original_text_for_custom_labels(
+        self, mock_boto3_client
+    ):
+        client = Mock()
+        client.recognize_text.return_value = {}
+        mock_boto3_client.return_value = client
+
+        self.assertEqual(interpret_query("Sally"), ["sally"])
+        self.assertEqual(interpret_query("show me Sally"), ["sally"])
+
     def test_interpret_query_with_empty_input(self):
         self.assertEqual(interpret_query(""), [])
         self.assertEqual(interpret_query(None), [])
